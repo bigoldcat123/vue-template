@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { daoLogin } from '@/api/auth';
+import Auth from '@/api/auth';
 import { useCurrentUserStore } from '@/stores/currentUser';
 import { useRouter } from 'vue-router';
 const router = useRouter()
@@ -58,7 +58,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {
-            daoLogin(ruleForm).then((res) => {
+            Auth.daoLogin(ruleForm).then((res) => {
                 currentUser.setValue(res.data.value)
                 router.push({path:'/'})
             }).catch((err) => {

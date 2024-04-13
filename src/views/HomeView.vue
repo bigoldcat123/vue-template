@@ -1,16 +1,22 @@
 <script setup lang="ts">
-import {ref} from 'vue'
+import { ref } from 'vue'
 import { useCurrentUserStore } from '@/stores/currentUser';
 import { useRouter } from 'vue-router';
+import auth from '@/api/auth';
 const router = useRouter()
 const currentUser = useCurrentUserStore()
 function logout() {
-    currentUser.logout()
-    router.push({path:'/login'})
+    auth.logout().then(res => {
+
+        currentUser.logout()
+        router.push({ path: '/login' })
+    })
 }
 
 </script>
 
 <template>
-<div><button @click="logout">logout</button></div>
+    <div>{{ currentUser.getToken() }}</div>
+    <div>{{ currentUser.getUserDetail() }}</div>
+    <div><button @click="logout">logout</button></div>
 </template>

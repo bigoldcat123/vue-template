@@ -1,8 +1,17 @@
 import server from ".."
-export function daoLogin(daoLoginUser:DaoLoginUser) {
-    return server.post('login')
-}
+class  Auth<T> {
 
-export function mailLogin(mailLoginUser:MailLoginUser) {
-    return server.post('login')
+    daoLogin(daoLoginUser:DaoLoginUser) {
+        return server.post<T>('login',daoLoginUser,{
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }})
+    }
+    mailLogin(mailLoginUser:MailLoginUser) {
+        return server.post<T>('login')
+    }
+    logout() {
+        return server.post('logout')
+    }
 }
+export default new Auth<ResponseData>()

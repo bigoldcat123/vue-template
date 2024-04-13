@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import type { FormInstance, FormRules } from 'element-plus'
-import { mailLogin } from '@/api/auth';
+import Auth from '@/api/auth';
 import { useCurrentUserStore } from '@/stores/currentUser';
 import { useRouter } from 'vue-router';
 const router = useRouter()
@@ -58,7 +58,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
     formEl.validate((valid) => {
         if (valid) {
-           mailLogin(ruleForm).then(res => {
+            Auth.mailLogin(ruleForm).then(res => {
 
            })
         } else {
