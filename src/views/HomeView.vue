@@ -12,7 +12,15 @@ function logout() {
         router.push({ path: '/login' })
     })
 }
-
+const ws = new WebSocket('/api/ws')
+ws.onopen = (e) => {
+    console.log(e);
+    ws.send("hello")
+}
+ws.onmessage = (e) => {
+    console.log(e.data);
+    
+}
 </script>
 
 <template>

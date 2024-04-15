@@ -60,7 +60,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
         if (valid) {
             Auth.daoLogin(ruleForm).then((res) => {
                 currentUser.setValue(res.data.value)
-                router.push({path:'/'})
+                router.back()
             }).catch((err) => {
                 console.log(err);
             })
