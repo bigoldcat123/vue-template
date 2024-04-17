@@ -8,12 +8,11 @@ const router = useRouter()
 const currentUser = useCurrentUserStore()
 function logout() {
     auth.logout().then(res => {
-
         currentUser.logout()
         router.push({ path: '/login' })
     })
 }
-const ws = new WebSocket('/api/ws',currentUser.getToken())
+const ws = new WebSocket('/ws',currentUser.getToken())
 ws.onopen = (e) => {
     console.log(e);
     ws.send("hello")
@@ -24,15 +23,15 @@ ws.onmessage = (e) => {
 ws.onerror = (e) => {
     console.log(e);
 }
-server.post('/no',{
-    id:'1',
-    testName:'x',
-    email:'xx@som',
-    phone:'1111111111'
-}).then(res => {
-    console.log(res);
+// server.post('/no',{
+//     id:'1',
+//     testName:'x',
+//     email:'xx@som',
+//     phone:'1111111111'
+// }).then(res => {
+//     console.log(res);
     
-})
+// })
 </script>
 
 <template>

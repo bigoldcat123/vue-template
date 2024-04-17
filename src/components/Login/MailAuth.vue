@@ -1,14 +1,14 @@
 <template>
         <el-form ref="ruleFormRef" style="max-width: 100%;" :model="ruleForm" status-icon :rules="rules" label-width="auto"
         class="demo-ruleForm">
-        <el-form-item label="username" prop="username">
-            <el-input v-model="ruleForm.mail" type="text" autocomplete="off" />
+        <el-form-item label="email" prop="email">
+            <el-input v-model="ruleForm.email" type="text" autocomplete="off" />
         </el-form-item>
         <el-form-item label="code" prop="code">
             <el-input v-model="ruleForm.code" type="test" autocomplete="off" />
         </el-form-item>
         <el-form-item>
-            <el-button @click="resetForm(ruleFormRef)">获取验证吗</el-button>
+            <el-button :disabled="codeobtainbtnenable" @click="obtainCode">{{ obtainBtnMsg }}</el-button>
             <el-button type="primary" @click="submitForm(ruleFormRef)">Submit</el-button>
         </el-form-item>
     </el-form>
@@ -22,7 +22,10 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 const currentUser = useCurrentUserStore()
 const ruleFormRef = ref<FormInstance>()
-
+const obtain_MESSAGE = '获取验证码'
+const obtaining_MESSAGE = '正在获取'
+const obtainBtnMsg = ref(obtain_MESSAGE)
+const codeobtainbtnenable = ref(false)
 const checkUsername = (rule: any, value: string, callback: any) => {
     if (!value) {
         return callback(new Error('Please input the userName'))
@@ -45,12 +48,12 @@ const validatePass = (rule: any, value: any, callback: any) => {
 }
 
 const ruleForm = reactive<MailLoginUser>({
-    mail: '',
+    email: '',
     code: ''
 })
 
 const rules = reactive<FormRules<MailLoginUser>>({
-    mail: [{ validator: checkUsername, trigger: 'blur' }],
+    email: [{ validator: checkUsername, trigger: 'blur' }],
     code: [{ validator: validatePass, trigger: 'blur' }],
 })
 
@@ -59,7 +62,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
     formEl.validate((valid) => {
         if (valid) {
             Auth.mailLogin(ruleForm).then(res => {
-
+                currentUser.setValue(res.data.value)
+                router.back()
            })
         } else {
             console.log('error submit!')
@@ -68,9 +72,16 @@ const submitForm = (formEl: FormInstance | undefined) => {
     })
 }
 
-const resetForm = (formEl: FormInstance | undefined) => {
-    if (!formEl) return
-    formEl.resetFields()
+const obtainCode = () => {
+    obtainBtnMsg.value = obtaining_MESSAGE
+    codeobtainbtnenable.value = true
+    Auth.getMailCode(ruleForm.email).then(res => {
+        obtainBtnMsg.value = obtain_MESSAGE
+        codeobtainbtnenable.value = false
+    }).catch(e => {
+        obtainBtnMsg.value = obtain_MESSAGE
+        codeobtainbtnenable.value = false
+    })
 }
 </script>
 <style scoped>

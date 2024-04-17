@@ -27,6 +27,6 @@ declare type DaoLoginUser = {
     password: string
 }
 declare type MailLoginUser = {
-    mail: string
+    email: string
     code: string
 }
