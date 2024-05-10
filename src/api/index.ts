@@ -2,6 +2,9 @@ import axios from "axios";
 import { useCurrentUserStore } from "@/stores/currentUser";
 import { ElMessage } from 'element-plus'
 
+console.log(import.meta.env);
+
+
 const SHOW_DEFAULT = "0"; // don't show anything
 const SHOW_SUCCESS = "1";
 const SHOW_ERROR = "2";
