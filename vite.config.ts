@@ -4,28 +4,22 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-  ],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+import viteBaseConfig from './vite.config.base'
+import viteDevConfig from './vite.config.dev'
+import viteProdConfig from './vite.config.prod'
+
+const configResove = {
+    "build":() => {
+      console.log('build');  
+      return ({...viteProdConfig,...viteBaseConfig})
     },
-  },
-  server:{
-    proxy:{
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-      },
-      '/ws': {
-        target: 'ws://localhost:8080',
-        ws: true,
-      },
+    "serve":() => {
+      // console.log('serve');
+      return ({...viteDevConfig,...viteBaseConfig})
     }
   }
+
+// https://vitejs.dev/config/
+export default defineConfig((env) => {
+  return configResove[env.command]()
 })
