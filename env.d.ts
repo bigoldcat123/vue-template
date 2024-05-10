@@ -11,7 +11,7 @@ declare type ResponseData = {
     show:boolean,
     value:any
 }
-com.example.demo.common.CurrentUser
+//com.example.demo.common.CurrentUser
 declare type UserDetail = {
     id:string
     name: string
