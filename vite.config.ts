@@ -14,7 +14,7 @@ const configResove = {
       return ({...viteProdConfig,...viteBaseConfig})
     },
     "serve":() => {
-      // console.log('serve');
+      console.log('serve');
       return ({...viteDevConfig,...viteBaseConfig})
     }
   }
