@@ -16,6 +16,8 @@ import UserNamePasswordAuth from '@/components/Login/UserNamePasswordAuth.vue';
 import MailAuth from '@/components/Login/MailAuth.vue';
 const authList = [UserNamePasswordAuth, MailAuth]
 const currentAuth = ref(0)
+console.log(import.meta.env);
+
 </script>
 <style scoped>
 .container {
