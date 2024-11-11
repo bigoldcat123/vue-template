@@ -56,6 +56,7 @@ const rules = reactive<FormRules<DaoLoginUser>>({
 
 const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
+    //@ts-ignore
     formEl.validate((valid) => {
         if (valid) {
             Auth.daoLogin(ruleForm).then((res) => {

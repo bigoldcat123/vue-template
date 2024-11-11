@@ -59,6 +59,7 @@ const rules = reactive<FormRules<MailLoginUser>>({
 
 const submitForm = (formEl: FormInstance | undefined) => {
     if (!formEl) return
+    //@ts-ignore
     formEl.validate((valid) => {
         if (valid) {
             Auth.mailLogin(ruleForm).then(res => {

@@ -4,8 +4,9 @@
             <component :is="authList[currentAuth]"></component>
         </div>
         <div class="bottombtns">
-            <button @click="currentAuth = 0"> password</button>
-            <button @click="currentAuth = 1"> mail</button>
+            <button class=" border-2 p-1 rounded-md hover:shadow-lg" @click="currentAuth = 0"> password</button>
+            
+            <button class=" border-2 p-1 rounded-md hover:shadow-lg" @click="currentAuth = 1"> mail</button>
         </div>
     </div>
 
