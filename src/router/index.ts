@@ -20,19 +20,19 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const currentUser = useCurrentUserStore()
-  if (whiteList.includes(to.path)) {
-    next()
-  } else {
-    if (to.name !== 'login' && !currentUser.isLogin()) {
-      next({ name: 'login' })
-    } else if (to.name == 'login' && currentUser.isLogin()) {
-      next({ name: 'home' })
-    } else {
-      next()
-    }
-  }
+// router.beforeEach((to, from, next) => {
+//   const currentUser = useCurrentUserStore()
+//   if (whiteList.includes(to.path)) {
+//     next()
+//   } else {
+//     if (to.name !== 'login' && !currentUser.isLogin()) {
+//       next({ name: 'login' })
+//     } else if (to.name == 'login' && currentUser.isLogin()) {
+//       next({ name: 'home' })
+//     } else {
+//       next()
+//     }
+//   }
 
-})
+// })
 export default router

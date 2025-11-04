@@ -35,7 +35,7 @@ ws.onerror = (e) => {
 </script>
 
 <template>
-    <div>{{ currentUser.getToken() }}</div>
+    <div  class="bg-red-200">{{ currentUser.getToken() }}</div>
     <div>{{ currentUser.getUserDetail() }}</div>
     <div><button @click="logout">logout</button></div>
 </template>

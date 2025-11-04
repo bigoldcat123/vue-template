@@ -1,9 +1,6 @@
-@import './base.css';
+@import './base.css' layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import 'tailwindcss';
 #app {
   max-width: 1280px;
   padding: 2rem;

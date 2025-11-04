@@ -7,6 +7,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineConfig(
   {
     plugins: [
@@ -18,14 +20,15 @@ export default defineConfig(
       Components({
         resolvers: [ElementPlusResolver()],
       }),
-      {
-        enforce:'pre',
-        transform(code, id, options) {
-            if(!id.includes('node_modules')) {
-              console.log(id);
-            }
-        },
-      },
+      tailwindcss(),
+      // {
+      //   enforce:'pre',
+      //   transform(code, id, options) {
+      //       if(!id.includes('node_modules')) {
+      //         console.log(id);
+      //       }
+      //   },
+      // },
       
     ],
     resolve: {
